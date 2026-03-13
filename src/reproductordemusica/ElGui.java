@@ -40,11 +40,6 @@ import javax.swing.SwingConstants;
 public class ElGui extends JFrame{
 
 
-    private DefaultListModel<cancion> modelo = new DefaultListModel<>();
-    private JList<cancion> listaUI = new JList<>(modelo);
-    private AdministrarArchivos admin = new AdministrarArchivos();
-
-
     
     private JList<cancion> jlPlaylist;
     private DefaultListModel<cancion> modeloLista;
@@ -107,6 +102,7 @@ public class ElGui extends JFrame{
         panelDerecho.add(lblInfoCancion);
         add(panelDerecho, BorderLayout.EAST);
 
+        jlPlaylist.setModel(modeloLista); 
        
         JPanel panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
          panelControles.setBackground(rosadoClaro);
@@ -117,8 +113,20 @@ public class ElGui extends JFrame{
         JButton btnRemove = crearBotonRosado("remover");
      
         btnPlay.addActionListener(e -> {
+  System.out.println("Índice seleccionado: " + jlPlaylist.getSelectedIndex());
+    Object valor = jlPlaylist.getSelectedValue();
+    System.out.println("Valor recuperado: " + valor);
 
-            cancion seleccionada = listaUI.getSelectedValue();
+    if (valor != null) {
+        cancion seleccionada = (cancion) valor;
+        reproductorAudio.reproducirMP3(seleccionada.getRutaArchivoAudio());
+    } else {
+        JOptionPane.showMessageDialog(this, "La lista cree que no hay nada seleccionado");
+    }
+            
+            
+            
+            cancion seleccionada = (cancion) jlPlaylist.getSelectedValue();
 
             if (seleccionada != null) {
                 
