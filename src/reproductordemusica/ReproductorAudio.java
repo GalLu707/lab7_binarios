@@ -22,6 +22,8 @@ import javazoom.jl.player.Player;
 public class ReproductorAudio {
     private Clip clip;
     private long posicionPausa;
+     private Player player; 
+
     private String rutaActual;
     
     public void play(String rutaArchivo) {
@@ -72,7 +74,7 @@ public class ReproductorAudio {
         new Thread(() -> {
             try {
                 System.out.println("Reproduciendo: " + ruta);
-                player.play(); // Aquí es donde JLayer hace la magia
+                player.play();
             } catch (Exception e) {
                 System.out.println("Error al dar play: " + e.getMessage());
             }
@@ -82,6 +84,12 @@ public class ReproductorAudio {
         System.out.println("No se encontró el archivo o formato no válido: " + e.getMessage());
     }
 }
+     public void pararMusica() {
+        if (player != null) {
+            player.close(); 
+            System.out.println("Música detenida ");
+        }
+    }
     
     
 }

@@ -137,7 +137,10 @@ public class ElGui extends JFrame{
         });
   
         btnPause.addActionListener(e -> accionPause());
-        btnStop.addActionListener(e -> accionStop());
+        btnStop.addActionListener(e->{
+            reproductorAudio.pararMusica(); 
+        });
+         
         btnAdd.addActionListener(e -> accionAdd());
         btnRemove.addActionListener(e -> accionRemove());
 

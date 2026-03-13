@@ -9,10 +9,10 @@ import java.io.Serializable;
  * @author USER
  */
 public class cancion implements Serializable {
-    private static final long serialVersionUID = 1L; // Buena práctica para Serializable
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String artista;
-    private double duracion; // Guardado como decimal (ej: 3.5 = 3min 30seg)
+    private double duracion; 
     private String rutaImagen;
     private String rutaArchivoAudio;
     private Genero genero;

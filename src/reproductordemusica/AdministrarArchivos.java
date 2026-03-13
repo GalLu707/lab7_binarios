@@ -35,7 +35,7 @@ public class AdministrarArchivos {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
             return (ArrayList<cancion>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            // Si hay error (ej: archivo corrupto o clase cambiada), devolvemos lista vacía
+           
             return new ArrayList<>();
         }
     }
