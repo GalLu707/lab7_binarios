@@ -4,6 +4,8 @@
  */
 package reproductordemusica;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author USER
@@ -12,7 +14,7 @@ public class ReproductorDeMusica {
 
    
     public static void main(String[] args) {
-        System.out.println("ola");
+      SwingUtilities.invokeLater(() -> new ElGui());
     }
     
 }
