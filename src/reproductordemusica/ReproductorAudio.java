@@ -26,46 +26,14 @@ public class ReproductorAudio {
 
     private String rutaActual;
     
-    public void play(String rutaArchivo) {
-        if (rutaArchivo.equals(rutaActual) && clip != null && !clip.isRunning()) {
-            clip.setMicrosecondPosition(posicionPausa);
-            clip.start();
-            return;
-        }
-    stop(); 
-        try {
-            File archivo = new File(rutaArchivo);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);
-            clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            rutaActual = rutaArchivo;
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println("Error al reproducir audio: " + e.getMessage());
-        }
-    }
-    
-     public void pause() {
-        if (clip != null && clip.isRunning()) {
-            posicionPausa = clip.getMicrosecondPosition();
-            clip.stop();
-        }
-    }
-    public void stop() {
-        if (clip != null) {
-            clip.stop();
-            clip.close();
-            clip = null;
-            posicionPausa = 0;
-            rutaActual = null;
-        }
-    }
+
 
     public boolean estaReproduciendo() {
         return clip != null && clip.isRunning();
     }
 
     public void reproducirMP3(String ruta) {
+        pararMusica();
     try {
         FileInputStream fis = new FileInputStream(ruta);
         Player player = new Player(fis);
@@ -87,6 +55,7 @@ public class ReproductorAudio {
      public void pararMusica() {
         if (player != null) {
             player.close(); 
+            player = null;
             System.out.println("Música detenida ");
         }
     }

@@ -136,9 +136,11 @@ public class ElGui extends JFrame{
             }
         });
   
-        btnPause.addActionListener(e -> accionPause());
+        btnPause.addActionListener(e->{
+                    accionStop(); 
+        });
         btnStop.addActionListener(e->{
-            reproductorAudio.pararMusica(); 
+            accionStop();
         });
          
         btnAdd.addActionListener(e -> accionAdd());
@@ -206,18 +208,18 @@ public class ElGui extends JFrame{
 
     private void accionPlay() {
         if (cancionSeleccionada != null) {
-            reproductorAudio.play(cancionSeleccionada.getRutaArchivoAudio());
+            reproductorAudio.reproducirMP3(cancionSeleccionada.getRutaArchivoAudio());
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una canción de la lista.");
         }
     }
 
     private void accionPause() {
-        reproductorAudio.pause();
+        reproductorAudio.pararMusica();
     }
 
     private void accionStop() {
-        reproductorAudio.stop();
+        reproductorAudio.pararMusica();
     }
 
     private void accionAdd() {
@@ -289,12 +291,12 @@ public class ElGui extends JFrame{
             
             if (reproductorAudio.estaReproduciendo() && cancionSeleccionada != null &&
                 cancionAEliminar.getRutaArchivoAudio().equals(cancionSeleccionada.getRutaArchivoAudio())) {
-                reproductorAudio.stop();
+                reproductorAudio.pararMusica();
             }
 
             modeloLista.remove(indiceSeleccionado);
             actualizarArchivoBinario();
-            reproductorAudio.stop();
+            reproductorAudio.pararMusica();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una canción para eliminar.");
         }
